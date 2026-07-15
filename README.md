@@ -29,12 +29,29 @@ All content lives in a single typed array so it's easy to edit:
   Each entry is a `LinkItem`:
 
   ```ts
-  type LinkItem = { label: string; url: string; icon?: string };
+  type LinkItem = {
+    label: string;
+    url: string;          // must be https://
+    icon?: LinkIcon;      // maps to an inline SVG in app/components/Icons.tsx
+    section?: "main" | "beyond";
+    primary?: boolean;    // one filled accent CTA
+  };
   ```
 
-  `icon` is optional (an emoji or short string shown before the label).
+  - `section: "main"` (default) renders in the primary stack; `"beyond"`
+    renders as quieter personal links under the "Beyond code" divider.
+  - `primary: true` styles a link as the filled accent call-to-action.
+  - `icon` must be one of the keys in
+    [app/components/Icons.tsx](app/components/Icons.tsx) — add a new SVG there
+    to introduce a new icon.
 
-The page ([app/page.tsx](app/page.tsx)) simply maps over this array.
+The page ([app/page.tsx](app/page.tsx)) maps over this array and groups by section.
+
+## Theme
+
+Dark mode is class-based (Tailwind `darkMode: "class"`). The toggle is in
+[app/components/ThemeToggle.tsx](app/components/ThemeToggle.tsx); the initial
+theme respects the OS preference and persists to `localStorage`.
 
 ## Avatar
 
@@ -43,9 +60,8 @@ best — it's rendered as a 112×112 circle).
 
 ## Notes
 
-- The Apple App Store link in `app/data/links.ts` is a **placeholder** — confirm
-  the exact URL and update it.
-- Theme is intentionally neutral (light background, dark text) for now; styling
-  will be refined later.
+- All link URLs are `https://`.
+- Icons are inline SVGs (no icon library) — see
+  [app/components/Icons.tsx](app/components/Icons.tsx).
 - Page metadata (title, description, Open Graph) is set in
   [app/layout.tsx](app/layout.tsx).

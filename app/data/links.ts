@@ -1,53 +1,85 @@
+export type LinkSection = "main" | "beyond";
+
+export type LinkIcon =
+  | "calendar"
+  | "website"
+  | "case-study"
+  | "github"
+  | "linkedin"
+  | "article"
+  | "instagram"
+  | "camera";
+
 export type LinkItem = {
   label: string;
   url: string;
-  icon?: string;
+  icon?: LinkIcon;
+  section?: LinkSection;
+  /** Renders as the filled accent primary call-to-action. */
+  primary?: boolean;
 };
 
 /**
  * Edit this array to change the links shown on the page.
- * `icon` is optional — an emoji or short string rendered before the label.
+ * - `section` groups links into "main" (business) or "beyond" (personal footnote).
+ * - `primary` styles a single link as the filled accent CTA.
+ * - `icon` maps to an inline SVG defined in app/page.tsx.
+ * All URLs must be https://.
  */
 export const links: LinkItem[] = [
   {
-    // Placeholder — confirm the exact App Store developer/app URL.
-    label: "Apple App Store",
-    url: "https://apps.apple.com/developer/rotem-nevgauker",
-    icon: "🍎",
+    label: "Book a Strategy Call",
+    url: "https://calendly.com/nevgauker/initial-counseling",
+    icon: "calendar",
+    section: "main",
+    primary: true,
   },
   {
-    label: "My Github Profile",
+    label: "My Website — Technical Partner for Startups",
+    url: "https://www.rotemnev.com/en",
+    icon: "website",
+    section: "main",
+  },
+  {
+    label: "Case Study: Board Game Hub",
+    url: "https://www.rotemnev.com/en/case-studies/board-game-hub",
+    icon: "case-study",
+    section: "main",
+  },
+  {
+    label: "GitHub",
     url: "https://github.com/nevgauker",
-    icon: "💻",
+    icon: "github",
+    section: "main",
   },
   {
-    label: "Full Stack Developer - My Website",
-    url: "http://rotemnev.com",
-    icon: "🌐",
-  },
-  {
-    label: "My Linkedin Profile",
+    label: "LinkedIn",
     url: "https://www.linkedin.com/in/rotem-nevgauker-73622037/",
-    icon: "💼",
+    icon: "linkedin",
+    section: "main",
   },
   {
-    label: "My Facebook Profile",
-    url: "https://www.facebook.com/rotem.nevgauker",
-    icon: "📘",
+    label: "Article: Flutter Through the Eyes of an iOS Developer",
+    url: "https://medium.com/@rotemnevgauker/how-flutter-feels-to-an-experienced-ios-developer-ec4c456ceb2e",
+    icon: "article",
+    section: "main",
   },
   {
-    label: "instagram.com",
-    url: "https://instagram.com/nevgauker",
-    icon: "📷",
+    label: "Photography — Flickr Gallery",
+    url: "https://www.flickr.com/photos/nevgauker/",
+    icon: "camera",
+    section: "beyond",
   },
   {
     label: "Photography Portfolio",
-    url: "http://nevgauker.wixsite.com/rotem",
-    icon: "🖼️",
+    url: "https://nevgauker.wixsite.com/rotem",
+    icon: "camera",
+    section: "beyond",
   },
   {
-    label: "rotem nevgauker",
-    url: "http://www.flickr.com/photos/nevgauker/",
-    icon: "📸",
+    label: "Instagram",
+    url: "https://instagram.com/nevgauker",
+    icon: "instagram",
+    section: "beyond",
   },
 ];
